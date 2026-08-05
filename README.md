@@ -1,5 +1,5 @@
 # Csapat felépítés:
-Tóth Csanád - Front End (keretrendszer: Vue.js)
+Tóth Csanád - Front End (keretrendszer: React)
 Varga Sándor - Adatbázis
 Csehely Dominik - Back End és projekt vezető
 
