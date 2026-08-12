@@ -1,6 +1,6 @@
 # Csapat felépítés:
 Tóth Csanád - Front End (keretrendszer: React)
-Varga Sándor - Adatbázis
+Varga Sándor - Adatbázis DB
 Csehely Dominik - Back End és projekt vezető
 
 # Gym-web-app
