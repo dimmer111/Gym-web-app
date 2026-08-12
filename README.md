@@ -2,7 +2,7 @@
 
 ## Csapat felépítése
 
-* **Tóth Csanád** – Frontend fejlesztő, React keretrendszer
+* **Toth Csanád** – Frontend fejlesztő, React keretrendszer
 * **Varga Sándor** – Adatbázis fejlesztő
 * **Csehely Dominik** – Backend fejlesztő és projektvezető
 
@@ -41,7 +41,7 @@ A célunk egy egyszerűen használható, átlátható és mobiltelefonon, valami
 
 A frontend feladata az alkalmazás felhasználói felületének elkészítése.
 
-A frontend fejlesztéséért **Tóth Csanád** felel.
+A frontend fejlesztéséért **Toth Csanád** felel.
 
 A projektben a **React** keretrendszert fogjuk használni.
 
@@ -74,10 +74,6 @@ A backend feladatai:
 * adatok lekérdezése,
 * statisztikákhoz szükséges adatok biztosítása,
 * frontend és adatbázis közötti kommunikáció biztosítása.
-
-A backend RESTful API-n keresztül fog kommunikálni a frontenddel.
-
----
 
 # Adatbázis
 
@@ -137,26 +133,6 @@ Az adatok:
 * törölhetők,
 * lekérdezhetők.
 
-## RESTful architektúra
-
-A rendszer két fő részből áll:
-
-**Backend:**
-
-* kezeli az adatokat,
-* biztosítja a REST API-t,
-* kommunikál az adatbázissal.
-
-**Frontend:**
-
-* biztosítja a felhasználói felületet,
-* megjeleníti az adatokat,
-* kommunikál a backend API-val.
-
-## Több eszköz támogatása
-
-A webalkalmazást reszponzív módon készítjük el, ezért számítógépen, laptopon, tableten és mobiltelefonon is használható lesz.
-
 ## Tiszta forráskód
 
 A projekt során törekszünk a Clean Code alapelveinek betartására.
@@ -186,31 +162,3 @@ A dokumentáció bemutatja:
 * a frontend működését,
 * a telepítés menetét,
 * az alkalmazás használatát.
-
----
-
-# A leadandó csomag tartalma
-
-## Forráskód
-
-A projekt teljes frontend és backend forráskódja.
-
-## Adatbázismodell-diagram
-
-Az adatbázis tábláinak és azok kapcsolatainak diagramja.
-
-## Adatbázis dump
-
-Az adatbázis exportált változata, amelyből az adatbázis újra létrehozható.
-
-## Dokumentáció
-
-A projekt teljes dokumentációja, amely tartalmazza a rendszer működését, felépítését, a használt technológiákat, a telepítést és a használatot.
-
-## Tesztkód
-
-Automatikus tesztek, amelyekkel ellenőrizhető az alkalmazás megfelelő működése.
-
-## Teszteredmények
-
-A tesztek futtatásának eredményei, amelyek igazolják, hogy a rendszer megfelelően működik.
