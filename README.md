@@ -2,7 +2,7 @@
 
 ## Csapat felépítése
 
-* **Toth Csanád** – Frontend fejlesztő, React keretrendszer
+* **Toth Csanád** – Frontend fejlesztő, Bootstrap keretrendszer
 * **Varga Sándor** – Adatbázis fejlesztő
 * **Csehely Dominik** – Backend fejlesztő és projektvezető
 
