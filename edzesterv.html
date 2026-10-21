@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — My Weekly Plan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+    <script src="data.js" defer></script>
+  </head>
+  <body data-access="user">
+    <div id="site-nav"></div>
+    <header class="section-black pt-5 mt-5">
+      <div class="container pt-4">
+        <p class="eyebrow">MY WEEKLY PLAN</p>
+        <h1>PLAN YOUR <span>WEEK.</span></h1>
+        <p class="hero-text mb-0">
+          Pick a day, add exercises, and set your sets and weight. Every change saves automatically.
+        </p>
+      </div>
+    </header>
+    <section class="section-dark">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap gap-2 mb-3" id="pills"></div>
+            <div class="plan-panel" id="panel"></div>
+          </div>
+          <div class="col-lg-4">
+            <div class="profile-panel">
+              <p class="eyebrow">WEEKLY PROGRESS</p>
+              <h3><span id="pct">0%</span> DONE</h3>
+              <div class="progress mb-3">
+                <div class="progress-bar" id="bar" style="width: 0%"></div>
+              </div>
+              <p class="text-muted" id="ptxt"></p>
+              <a
+                href="gyakorlattar.html"
+                class="btn btn-outline-light w-100 mb-2"
+                ><i class="bi bi-plus-lg me-1"></i> Add from library</a
+              ><a href="attekintes.html" class="btn btn-outline-light w-100"
+                >My workout log</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between gap-3"
+      >
+        <span>© 2026 Off Limits</span
+        ><span>100% online · Free · info@offlimits.hu</span>
+      </div>
+    </footer>
+    <div id="toast" class="toast-message"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        E = (s) => Auth.esc(s);
+      let cur;
+      const CATS = ["Chest", "Back", "Legs", "Shoulders", "Arms", "Core", "Other"],
+        LB = { sets: "Sets", reps: "Reps", kg: "kg" };
+      function render() {
+        const d = Data.get(),
+          w = Data.week(),
+          ex = d.plan[cur] || [];
+        $("#pills").innerHTML = Data.DAYS.map(
+          (x) =>
+            `<button class="btn btn-sm ${x === cur ? "btn-pulse" : "btn-outline-light"}" data-day="${x}">${x.slice(0, 3)}${(d.plan[x] || []).length ? ` <span class="badge bg-dark ms-1">${d.plan[x].length}</span>` : ""}</button>`,
+        ).join("");
+        $("#panel").innerHTML =
+          `<div class="d-flex justify-content-between align-items-center mb-3"><h2 class="mb-0">${cur}</h2>${w.days.includes(cur) ? '<span class="badge bg-success">Completed this week</span>' : ""}</div>` +
+          (ex.length
+            ? ex
+                .map(
+                  (e) =>
+                    `<div class="workout-row ex-row" data-id="${e.id}"><div class="flex-grow-1"><strong class="text-light">${E(e.name)}</strong> <small class="text-pulse">${E(e.cat)}</small></div><div class="d-flex gap-2 align-items-end">${["sets", "reps", "kg"].map((k) => `<label class="small text-muted">${LB[k]}<input type="number" min="0" step="${k === "kg" ? "0.5" : "1"}" class="form-control form-control-sm" style="width:72px" data-k="${k}" value="${e[k]}"></label>`).join("")}<button class="btn btn-sm btn-outline-danger" data-act="del" aria-label="Delete exercise"><i class="bi bi-trash"></i></button></div></div>`,
+                )
+                .join("")
+            : '<p class="text-muted">No exercises for this day yet. Add some from the Exercise Library, or enter one below.</p>') +
+          `<form class="row g-2 mt-3"><div class="col-sm-6"><input class="form-control form-control-sm" placeholder="Custom exercise name" required></div><div class="col-sm-4"><select class="form-select form-select-sm">${CATS.map((c) => `<option>${c}</option>`).join("")}</select></div><div class="col-sm-2"><button class="btn btn-sm btn-outline-light w-100">Add</button></div></form>` +
+          (ex.length
+            ? `<div class="d-flex flex-wrap gap-2 align-items-center mt-4 pt-3 border-top border-secondary"><input type="number" min="1" class="form-control form-control-sm" style="width:130px" placeholder="Duration (min)" data-min aria-label="Workout duration in minutes"><button class="btn btn-pulse btn-sm" data-act="fin"><i class="bi bi-check2-circle me-1"></i> Finish workout</button></div>`
+            : "");
+        const t = Math.max(w.planned.length, w.done),
+          p = t ? Math.round((w.done / t) * 100) : 0;
+        $("#pct").textContent = p + "%";
+        $("#bar").style.width = p + "%";
+        $("#ptxt").textContent = t
+          ? `${w.done} of ${t} planned workouts completed this week.`
+          : "You have no workouts planned for this week yet.";
+      }
+      $("#pills").onclick = (e) => {
+        const b = e.target.closest("[data-day]");
+        if (b) {
+          cur = b.dataset.day;
+          render();
+        }
+      };
+      $("#panel").onchange = (e) => {
+        const i = e.target;
+        if (i.dataset.k)
+          Data.upd(cur, i.closest(".ex-row").dataset.id, {
+            [i.dataset.k]: Math.max(0, +i.value || 0),
+          });
+      };
+      $("#panel").onclick = (e) => {
+        const b = e.target.closest("[data-act]");
+        if (!b) return;
+        if (b.dataset.act === "del") {
+          Data.del(cur, b.closest(".ex-row").dataset.id);
+          render();
+        }
+        if (b.dataset.act === "fin") {
+          const m = +$("#panel [data-min]").value;
+          if (!(m > 0))
+            return Auth.toast("Enter the workout duration in minutes.", 1);
+          Data.finish(cur, m);
+          Auth.toast("Workout logged! 💪");
+          render();
+        }
+      };
+      $("#panel").onsubmit = (e) => {
+        e.preventDefault();
+        const f = e.target;
+        Data.addEx(cur, {
+          name: f.querySelector("input").value.trim(),
+          cat: f.querySelector("select").value,
+        });
+        render();
+      };
+      addEventListener("authready", () => {
+        cur = Data.today();
+        render();
+      });
+    </script>
+  </body>
+</html>

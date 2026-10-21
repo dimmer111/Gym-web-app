@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — Admin Panel: Users</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+  </head>
+  <body data-access="admin">
+    <div id="site-nav"></div>
+    <header class="section-black pt-5 mt-5">
+      <div class="container pt-4">
+        <p class="eyebrow">ADMIN PANEL</p>
+        <h1>USER <span>MANAGEMENT</span></h1>
+        <p class="hero-text">
+          Here you can see registered members and their profile details. Passwords are stored encrypted and nobody can view them.
+        </p>
+        <div class="row g-3 mt-2" id="stats"></div>
+      </div>
+    </header>
+    <section class="section-dark">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row gap-3 mb-3">
+          <input
+            id="q"
+            class="form-control"
+            placeholder="Search by name or email…"
+            aria-label="Search"
+          /><select
+            id="f"
+            class="form-select w-auto"
+            aria-label="Status filter"
+          >
+            <option value="">All statuses</option>
+            <option value="1">Active</option>
+            <option value="0">Disabled</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Registered</th>
+                  <th>Last login</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+        </div>
+        <p class="small text-muted mt-3">
+          <i class="bi bi-shield-lock text-pulse"></i> Password: encrypted (SHA-256 + unique salt) — never shown in the admin panel.
+        </p>
+      </div>
+    </section>
+    <section class="section-black" style="padding: 60px 0">
+      <div class="container">
+        <h2 class="mb-3">Incoming <span>messages</span></h2>
+        <div id="msgs"></div>
+      </div>
+    </section>
+    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light border-secondary">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title">User details</h5>
+            <button
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="mBody"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span>© 2026 Off Limits · Admin Panel</span>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        d = (s) =>
+          s
+            ? new Date(s).toLocaleString("en-US", {
+                dateStyle: "medium",
+                timeStyle: "short",
+              })
+            : "—",
+        E = (s) => Auth.esc(s);
+      function draw() {
+        const all = Auth.users(),
+          q = $("#q").value.toLowerCase(),
+          f = $("#f").value;
+        $("#stats").innerHTML = [
+          ["Total accounts", all.length, "bi-people"],
+          ["Active", all.filter((u) => u.active).length, "bi-check-circle"],
+          ["Disabled", all.filter((u) => !u.active).length, "bi-slash-circle"],
+        ]
+          .map(
+            ([t, n, i]) =>
+              `<div class="col-md-4"><div class="stat-card"><i class="bi ${i}"></i><strong>${n}</strong><span>${t}</span></div></div>`,
+          )
+          .join("");
+        $("#rows").innerHTML =
+          all
+            .filter(
+              (u) =>
+                (u.name + u.email).toLowerCase().includes(q) &&
+                (f === "" || String(+u.active) === f),
+            )
+            .map(
+              (u) =>
+                `<tr><td><strong>${E(u.name)}</strong><br><small class="text-muted">${E(u.email)}</small></td><td><span class="badge ${u.role === "admin" ? "bg-info text-dark" : "bg-secondary"}">${u.role === "admin" ? "Admin" : "Member"}</span></td><td>${d(u.created)}</td><td>${d(u.lastLogin)}</td><td><span class="badge ${u.active ? "bg-success" : "bg-danger"}">${u.active ? "Active" : "Disabled"}</span></td><td class="text-end text-nowrap"><button class="btn btn-sm btn-outline-light" data-a="v" data-id="${u.id}">Details</button> ${u.role === "admin" ? "" : `<button class="btn btn-sm btn-outline-light" data-a="t" data-id="${u.id}">${u.active ? "Disable" : "Enable"}</button> <button class="btn btn-sm btn-outline-danger" data-a="x" data-id="${u.id}">Delete</button>`}</td></tr>`,
+            )
+            .join("") ||
+          '<tr><td colspan="6" class="text-center text-muted py-4">No results.</td></tr>';
+      }
+      $("#q").oninput = $("#f").onchange = draw;
+      $("#rows").onclick = (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        const u = Auth.users().find((x) => x.id === b.dataset.id);
+        if (!u) return;
+        if (b.dataset.a === "v") {
+          $("#mBody").innerHTML = `<dl class="row mb-0">${[
+            ["Name", E(u.name)],
+            ["Email", E(u.email)],
+            ["Role", u.role === "admin" ? "Admin" : "Member"],
+            ["Goal", E(u.goal)],
+            ["Training level", E(u.level)],
+            ["Registered", d(u.created)],
+            ["Last login", d(u.lastLogin)],
+            [
+              "Workouts completed",
+              (
+                JSON.parse(localStorage.getItem("ol_data_" + u.id) || "{}")
+                  .log || []
+              ).length,
+            ],
+            [
+              "Password",
+              '<i class="bi bi-lock-fill text-pulse"></i> encrypted, not viewable',
+            ],
+          ]
+            .map(
+              ([k, v]) =>
+                `<dt class="col-5 text-muted fw-normal">${k}</dt><dd class="col-7">${v}</dd>`,
+            )
+            .join("")}</dl>`;
+          new bootstrap.Modal("#userModal").show();
+        }
+        if (b.dataset.a === "t") {
+          Auth.setActive(u.id, !u.active);
+          Auth.toast(u.active ? "Account disabled." : "Account enabled.");
+          draw();
+        }
+        if (
+          b.dataset.a === "x" &&
+          confirm("Are you sure you want to delete this user:  " + u.name + "?")
+        ) {
+          Auth.remove(u.id);
+          Auth.toast("User deleted.");
+          draw();
+        }
+      };
+      function drawMsgs() {
+        $("#msgs").innerHTML =
+          Auth.messages()
+            .map(
+              (x) =>
+                `<div class="plan-panel mb-3 ${x.read ? "" : "border-success"}"><div class="d-flex justify-content-between flex-wrap gap-2"><div><strong>${E(x.subject)}</strong> ${x.read ? "" : '<span class="badge bg-success">New</span>'}<br><small class="text-muted">${E(x.name)} · ${E(x.email)} · ${d(x.date)}</small></div><div class="text-nowrap"><button class="btn btn-sm btn-outline-light" data-a="r" data-id="${x.id}">${x.read ? "Mark unread" : "Mark read"}</button> <button class="btn btn-sm btn-outline-danger" data-a="m" data-id="${x.id}">Delete</button></div></div><p class="mt-3 mb-0" style="white-space:pre-wrap">${E(x.text)}</p></div>`,
+            )
+            .join("") || '<p class="text-muted">No messages yet.</p>';
+      }
+      $("#msgs").onclick = (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        const x = Auth.messages().find((y) => y.id === b.dataset.id);
+        if (!x) return;
+        b.dataset.a === "r" ? Auth.setRead(x.id, !x.read) : Auth.delMsg(x.id);
+        drawMsgs();
+      };
+      addEventListener("load", () => {
+        draw();
+        drawMsgs();
+      });
+    </script>
+  </body>
+</html>

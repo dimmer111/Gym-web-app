@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — My Profile and Settings</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+    <script src="data.js" defer></script>
+  </head>
+  <body data-access="user">
+    <div id="site-nav"></div>
+
+    <header class="section-black pt-5 mt-5 profile-hero">
+      <div class="container pt-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8 reveal">
+            <p class="eyebrow">USER PROFILE</p>
+            <h1 class="display-2 fw-bold" data-bind="heroName"></h1>
+            <p class="hero-text">Active member · Your details and settings</p>
+          </div>
+          <div class="col-lg-4 text-lg-end reveal delay-1">
+            <div
+              class="profile-avatar mx-lg-auto ms-lg-auto"
+              data-bind="initials"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-dark">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="profile-panel reveal">
+              <div
+                class="d-flex justify-content-between align-items-center mb-4"
+              >
+                <div>
+                  <p class="eyebrow mb-1">BASIC INFO</p>
+                  <h2 class="mb-0">PROFILE <span>DETAILS</span></h2>
+                </div>
+                <button class="btn btn-pulse btn-sm" onclick="saveProfile()">
+                  <i class="bi bi-check2 me-1"></i> Save
+                </button>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Full name</label
+                  ><input class="form-control" id="pName" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label
+                  ><input class="form-control" id="pEmail" readonly />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Goal</label
+                  ><select id="pGoal" class="form-select">
+                    <option>Build strength</option>
+                    <option>Build muscle</option>
+                    <option>Endurance</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Training level</label
+                  ><select id="pLevel" class="form-select">
+                    <option>Advanced</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="profile-panel h-100 reveal delay-1">
+              <p class="eyebrow">QUICK STATS</p>
+              <div class="profile-stat">
+                <strong id="sTotal">0</strong><span>Workouts completed</span>
+              </div>
+              <div class="profile-stat">
+                <strong id="sVol">0 kg</strong><span>Weekly volume</span>
+              </div>
+              <div class="profile-stat">
+                <strong id="sPR">–</strong
+                ><span id="sPRl">Personal record</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="profile-panel reveal delay-2">
+              <div class="row g-4 align-items-center">
+                <div class="col-md-7">
+                  <p class="eyebrow">CURRENT WORKOUT PLAN</p>
+                  <h3>MY WEEKLY <span>PLAN</span></h3>
+                  <p class="text-muted mb-0" id="pPlan"></p>
+                </div>
+                <div class="col-md-5">
+                  <div class="d-flex justify-content-between small mb-2">
+                    <span>Weekly completion</span><strong id="pPct">0%</strong>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" id="pBar" style="width: 0%"></div>
+                  </div>
+                  <a
+                    href="edzesterv.html"
+                    class="btn btn-outline-light w-100 mt-3"
+                    >Open workout plan</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-black" style="padding: 60px 0">
+      <div class="container">
+        <div class="profile-panel" style="max-width: 640px">
+          <p class="eyebrow">SECURITY</p>
+          <h3>CHANGE <span>PASSWORD</span></h3>
+          <form id="pwForm" class="row g-3">
+            <div class="col-12">
+              <label class="form-label">Current password</label
+              ><input
+                type="password"
+                class="form-control"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">New password (min. 8 characters)</label
+              ><input
+                type="password"
+                class="form-control"
+                required
+                minlength="8"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Confirm new password</label
+              ><input
+                type="password"
+                class="form-control"
+                required
+                minlength="8"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="col-12">
+              <button class="btn btn-pulse">Change password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between gap-3"
+      >
+        <span>© 2026 Off Limits</span
+        ><span
+          ><a href="attekintes.html" class="footer-link">Overview</a> · Profile · Privacy</span
+        >
+      </div>
+    </footer>
+    <div id="toast" class="toast-message">Saved!</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("show");
+          }),
+        { threshold: 0.12 },
+      );
+      document.querySelectorAll(".reveal").forEach((e) => observer.observe(e));
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("visible");
+        setTimeout(() => t.classList.remove("visible"), 2200);
+      }
+    </script>
+    <script>
+      function saveProfile() {
+        const m = Auth.me();
+        Auth.update({
+          name: pName.value.trim() || m.name,
+          goal: pGoal.value,
+          level: pLevel.value,
+        });
+        Auth.toast("Profile saved!");
+        setTimeout(() => location.reload(), 800);
+      }
+      addEventListener("load", () => {
+        const m = Auth.me();
+        if (!m) return;
+        pName.value = m.name;
+        pEmail.value = m.email;
+        pGoal.value = m.goal;
+        pLevel.value = m.level;
+      });
+    </script>
+    <script>
+      addEventListener("authready", () => {
+        const s = Data.stats(),
+          w = Data.week(),
+          p = Object.entries(s.pr).sort((a, b) => b[1] - a[1])[0];
+        sTotal.textContent = s.total;
+        sVol.textContent =
+          Math.round(s.weekVol).toLocaleString("en-US") + " kg";
+        sPR.textContent = p ? p[1] + " kg" : "–";
+        sPRl.textContent = p ? p[0] + " – record" : "Personal record";
+        const t = Math.max(w.planned.length, w.done),
+          pc = t ? Math.round((w.done / t) * 100) : 0;
+        pPct.textContent = pc + "%";
+        pBar.style.width = pc + "%";
+        pPlan.textContent = w.planned.length
+          ? w.planned.length + " planned workout day" + (w.planned.length === 1 ? "" : "s") + ": " + w.planned.join(", ")
+          : "You don't have a weekly plan yet. Build one on the My Weekly Plan page.";
+      });
+      pwForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const i = pwForm.querySelectorAll("input");
+        if (i[1].value !== i[2].value)
+          return Auth.toast("The two new passwords don't match.", 1);
+        try {
+          await Auth.changePassword(i[0].value, i[1].value);
+          pwForm.reset();
+          Auth.toast("Password changed.");
+        } catch (x) {
+          Auth.toast(String(x), 1);
+        }
+      };
+    </script>
+  </body>
+</html>

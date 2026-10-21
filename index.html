@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — Home — Train and Progress</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+  </head>
+
+  <body data-access="public">
+    <div id="site-nav"></div>
+
+    <header id="home" class="hero-section">
+      <div class="hero-grid"></div>
+      <div class="floating dumbbell">
+        <i class="bi bi-lightning-charge-fill"></i>
+      </div>
+
+      <div class="container position-relative">
+        <div class="row align-items-center min-vh-100 py-5">
+          <div class="col-lg-7">
+            <div class="reveal">
+              <p class="eyebrow">100% ONLINE · 100% FREE</p>
+              <h1>BUILD YOUR OWN <span>WORKOUT.</span></h1>
+              <p class="hero-text">
+                Build your own workout plan, log your workouts, and track your progress — online, completely free.
+              </p>
+
+              <div class="d-flex flex-wrap gap-3 mt-4">
+                <a
+                  href="#regisztracio"
+                  class="btn btn-pulse btn-lg"
+                  data-guest-only
+                  >Sign up now</a
+                >
+                <a
+                  href="#belepes"
+                  class="btn btn-outline-light btn-lg"
+                  data-guest-only
+                  >I already have an account</a
+                ><a
+                  href="attekintes.html"
+                  class="btn btn-pulse btn-lg"
+                  data-user-only
+                  >Go to my overview</a
+                >
+              </div>
+
+              <div class="rating mt-4">
+                <span class="stars"><i class="bi bi-gift-fill"></i></span
+                ><span>Free · online · no subscription</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5 mt-5 mt-lg-0">
+            <div class="hero-card reveal delay-1">
+              <div class="pulse-ring"></div>
+              <div class="hero-card-icon"><i class="bi bi-barbell"></i></div>
+              <h3>Strength. Focus. Progress.</h3>
+              <p>
+                Track every workout, build your own plan, and watch yourself improve.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="terv" class="section-dark" data-guest-only>
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">WORKOUT PLAN BUILDER</p>
+          <h2>Build your own <span>workout.</span></h2>
+          <p>Build your own workout easily from the exercise library.</p>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-md-6 col-lg-3">
+            <div class="exercise-card reveal">
+              <div class="exercise-icon">
+                <i class="bi bi-lightning-fill"></i>
+              </div>
+              <h4>Bench Press</h4>
+              <span>Chest</span>
+              <button class="add-btn" onclick="addExercise(this)">+</button>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="exercise-card reveal delay-1">
+              <div class="exercise-icon">
+                <i class="bi bi-person-standing"></i>
+              </div>
+              <h4>Squat</h4>
+              <span>Legs</span>
+              <button class="add-btn" onclick="addExercise(this)">+</button>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="exercise-card reveal delay-2">
+              <div class="exercise-icon">
+                <i class="bi bi-person-arms-up"></i>
+              </div>
+              <h4>Deadlift</h4>
+              <span>Back</span>
+              <button class="add-btn" onclick="addExercise(this)">+</button>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="exercise-card reveal delay-3">
+              <div class="exercise-icon">
+                <i class="bi bi-person-fill-up"></i>
+              </div>
+              <h4>Shoulder Press</h4>
+              <span>Shoulders</span>
+              <button class="add-btn" onclick="addExercise(this)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="workout-builder reveal mt-5">
+          <div>
+            <small>YOUR WORKOUT</small>
+            <h3>New workout</h3>
+          </div>
+          <div class="workout-list" id="workoutList">
+            <div class="workout-empty text-muted py-3">
+              No exercises added yet. Tap the + button on the cards.
+            </div>
+          </div>
+          <button class="btn btn-pulse" onclick="saveWorkout()">
+            <i class="bi bi-check2"></i> Save workout
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="elozmenyek" class="section-black" data-guest-only>
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">WORKOUT LOG</p>
+          <h2>Look back at your <span>progress.</span></h2>
+          <p>Review your past workouts and see how far you've come.</p>
+        </div>
+
+        <div class="stat-card reveal mt-5">
+          <i class="bi bi-lock"></i>
+          <strong>Log in</strong>
+          <span>Your workouts and stats will appear here once you log in.</span>
+          <div class="mt-4">
+            <a href="#belepes" class="btn btn-pulse">Log in</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="szolgaltatasok" class="section-dark">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">EVERYTHING IS FREE</p>
+          <h2>Totally <span>free.</span></h2>
+          <p>
+            Off Limits is 100% online: no gym, no membership, no subscription. Sign up and use every feature with no restrictions.
+          </p>
+        </div>
+        <div class="row g-4 mt-2">
+          <div class="col-md-6 col-lg-3">
+            <div class="price-card popular reveal delay-0">
+              <div class="badge-pulse">Most popular</div>
+              <h3>Workout Plan Builder</h3>
+              <p>
+                Put together your weekly workout plan from the exercises, at your own pace.
+              </p>
+              <strong>Free <small>/ no limits</small></strong
+              ><a href="edzesterv.html" class="btn btn-pulse w-100 mt-4"
+                >Open</a
+              >
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="price-card reveal delay-1">
+              <h3>Exercise Library</h3>
+              <p>
+                Search exercises by muscle group, with step-by-step instructions.
+              </p>
+              <strong>Free <small>/ no limits</small></strong
+              ><a
+                href="gyakorlattar.html"
+                class="btn btn-outline-light w-100 mt-4"
+                >Open</a
+              >
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="price-card reveal delay-2">
+              <h3>Workout Log</h3>
+              <p>Record your workouts and look back at what you've done.</p>
+              <strong>Free <small>/ no limits</small></strong
+              ><a
+                href="attekintes.html"
+                class="btn btn-outline-light w-100 mt-4"
+                >Open</a
+              >
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="price-card reveal delay-3">
+              <h3>Progress Tracking</h3>
+              <p>Personal records and stats in one place.</p>
+              <strong>Free <small>/ no limits</small></strong
+              ><a
+                href="attekintes.html"
+                class="btn btn-outline-light w-100 mt-4"
+                >Open</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="regisztracio" class="section-black" data-guest-only>
+      <div class="container">
+        <div class="auth-box reveal">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <p class="eyebrow">SIGN UP</p>
+              <h2>Create your <span>account.</span></h2>
+              <p>
+                A free account in a few minutes, no credit card required. Then you can start building your workout plan right away.
+              </p>
+            </div>
+            <div class="col-lg-6">
+              <form onsubmit="Auth.onRegister(event)">
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  placeholder="Full name"
+                  required
+                />
+                <input
+                  class="form-control mb-3"
+                  type="email"
+                  placeholder="Email address"
+                  required
+                />
+                <input
+                  class="form-control mb-3"
+                  type="password"
+                  placeholder="Password"
+                  required
+                />
+                <input
+                  class="form-control mb-3"
+                  type="password"
+                  placeholder="Confirm password"
+                  required
+                />
+                <div class="form-check mb-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="accept"
+                    required
+                  />
+                  <label class="form-check-label" for="accept"
+                    >I accept the privacy policy</label
+                  >
+                </div>
+                <button class="btn btn-pulse w-100" type="submit">
+                  Create account
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="belepes" class="section-dark" data-guest-only>
+      <div class="container">
+        <div class="login-box reveal">
+          <p class="eyebrow">LOG IN</p>
+          <h2>Welcome <span>back.</span></h2>
+          <p>Log in to your account.</p>
+          <form onsubmit="Auth.onLogin(event)">
+            <input
+              class="form-control mb-3"
+              type="email"
+              placeholder="Email address"
+              required
+            />
+            <input
+              class="form-control mb-3"
+              type="password"
+              placeholder="Password"
+              required
+            />
+            <div class="d-flex justify-content-between mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember" />
+                <label class="form-check-label" for="remember"
+                  >Remember me</label
+                >
+              </div>
+              <a
+                href="#"
+                class="pulse-link"
+                onclick="
+                  Auth.toast(
+                    'To reset your password, email us at info@offlimits.hu',
+                  );
+                  return false;
+                "
+                >Forgot your password?</a
+              >
+            </div>
+            <button class="btn btn-pulse w-100" type="submit">Log in</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between gap-3"
+      >
+        <span>© 2026 Off Limits</span>
+        <span>100% online · Free · info@offlimits.hu</span>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast-message">Saved!</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      function addExercise(button) {
+        const card = button.closest(".exercise-card");
+        const name = card.querySelector("h4").textContent;
+        const muscle = card.querySelector("span").textContent;
+        const list = document.getElementById("workoutList");
+        const empty = list.querySelector(".workout-empty");
+        if (empty) empty.remove();
+
+        const item = document.createElement("div");
+        item.className = "workout-item new-item";
+        item.innerHTML = `${name} <span>${muscle}</span>`;
+        list.appendChild(item);
+
+        button.textContent = "✓";
+        button.classList.add("added");
+        setTimeout(() => {
+          button.textContent = "+";
+          button.classList.remove("added");
+        }, 1000);
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2200);
+      }
+
+      function saveWorkout() {
+        Auth.me()
+          ? showToast("Your workout has been saved!")
+          : (Auth.toast("Please log in first to save your workout.", 1),
+            (location.hash = "belepes"));
+      }
+
+      function registerUser(e) {
+        e.preventDefault();
+        showToast("Registration successful!");
+      }
+
+      function loginUser(e) {
+        e.preventDefault();
+        showToast("Logged in successfully!");
+      }
+    </script>
+  </body>
+</html>
