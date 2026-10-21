@@ -1,10 +1,10 @@
 # Csapat felépítés:
-Tóth Csanád - Front End (keretrendszer: React)
+Tóth Csanád - Front End, bootstrap
 Varga Sándor - Adatbázis
 Csehely Dominik - Back End és projekt vezető
 
 # Gym-web-app
-Edzőtermi tagság- és edzésnapló alkalmazás  Probléma: Az edzőterembe járók nehezen követik a fejlődésüket.  Funkciók: felhasználói profil, edzéstervek létrehozása, gyakorlatok kezelése, súlyok és ismétlések rögzítése, fejlődési statisztikák.  Adatbázis: felhasználók, edzések, gyakorlatok, eredmények.
+Edzésnapló alkalmazás  Probléma: Az edzőterembe járók nehezen követik a fejlődésüket.  Funkciók: felhasználói profil, edzéstervek létrehozása, gyakorlatok kezelése, súlyok és ismétlések rögzítése, fejlődési statisztikák.  Adatbázis: felhasználók, edzések, gyakorlatok, eredmények.
 
 # A KKK elvárásainak kijegyzetelése
 A KKK elvárásainak kijegyzetelése
