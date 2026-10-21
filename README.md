@@ -1,4 +1,4 @@
-# Gym-web-app – Edzőtermi tagság- és edzésnapló alkalmazás
+# Gym-web-app – Edzésnapló alkalmazás
 
 ## Csapat felépítése
 
