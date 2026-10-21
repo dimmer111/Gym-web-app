@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — Exercise Library</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+    <script src="data.js" defer></script>
+  </head>
+
+  <body data-access="user">
+    <div id="site-nav"></div>
+
+    <header class="section-black pt-5 mt-5">
+      <div class="container pt-4">
+        <div class="section-heading reveal mx-auto text-center">
+          <p class="eyebrow">FREE EXERCISE LIBRARY</p>
+          <h2>INTERACTIVE <span>EXERCISE LIBRARY</span></h2>
+          <p class="mx-auto" style="max-width: 650px">
+            Browse the exercises, filter by muscle group, check out proper form, and add them to your workout!
+          </p>
+        </div>
+
+        <div class="row justify-content-center mt-4 reveal delay-1">
+          <div class="col-lg-7">
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-light"
+                ><i class="bi bi-search"></i
+              ></span>
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control form-control-lg"
+                placeholder="Search exercises, e.g. press, squat..."
+                onkeyup="filterExercises()"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="d-flex justify-content-center align-items-center gap-2 mt-4"
+        >
+          <label for="daySel" class="small text-muted">Add to:</label
+          ><select
+            id="daySel"
+            class="form-select form-select-sm w-auto"
+          ></select>
+        </div>
+        <div
+          class="d-flex flex-wrap justify-content-center gap-2 mt-3 reveal delay-2"
+        >
+          <button
+            class="btn btn-pulse btn-sm px-3 filter-btn active"
+            onclick="filterCategory('all', this)">All</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Chest', this)">Chest</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Back', this)">Back</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Legs', this)">Legs</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Shoulders', this)">Shoulders</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Arms', this)">Arms</button>
+          <button
+            class="btn btn-outline-light btn-sm px-3 filter-btn"
+            onclick="filterCategory('Core', this)"
+          >
+            Core
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-dark">
+      <div class="container">
+        <div class="row g-4" id="exerciseGrid">
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Chest" data-name="Barbell Bench Press"
+          >
+            <div class="exercise-card reveal">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon">
+                  <i class="bi bi-lightning-fill"></i>
+                </div>
+                <span class="badge bg-secondary">Advanced</span>
+              </div>
+              <h4>Barbell Bench Press</h4>
+              <span>Chest · Triceps · Shoulders</span>
+              <p class="text-muted small mt-2">
+                A fundamental compound exercise for building chest size and strength.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'Barbell Bench Press',
+                      'Chest',
+                      'Lie on the bench and grip the bar slightly wider than shoulder width. Lower it under control to the middle of your chest, then press it up explosively.',
+                      'Do not bounce the bar off your chest, and keep your core tight!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Legs" data-name="Barbell Squat"
+          >
+            <div class="exercise-card reveal delay-1">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon">
+                  <i class="bi bi-person-standing"></i>
+                </div>
+                <span class="badge bg-secondary">Advanced</span>
+              </div>
+              <h4>Barbell Squat</h4>
+              <span>Quadriceps · Glutes</span>
+              <p class="text-muted small mt-2">
+                The king of leg workouts, building your entire lower body and hip stability.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'Barbell Squat',
+                      'Legs',
+                      'Rest the bar on your upper back (traps). Stand with your feet shoulder-width apart, lower your hips to below parallel, then drive up through your heels.',
+                      'Keep your back straight and do not let your knees cave inward!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Back" data-name="Deadlift"
+          >
+            <div class="exercise-card reveal delay-2">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon">
+                  <i class="bi bi-person-arms-up"></i>
+                </div>
+                <span class="badge bg-danger">Expert</span>
+              </div>
+              <h4>Deadlift</h4>
+              <span>Back · Hamstrings · Glutes</span>
+              <p class="text-muted small mt-2">
+                A fundamental strength exercise that works the entire posterior chain.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'Deadlift',
+                      'Back',
+                      'Stand in front of the bar, brace your back, grab the bar, and lift the weight up to your thighs by driving your hips forward.',
+                      'Never round your lower back while lifting!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Shoulders" data-name="Dumbbell Shoulder Press"
+          >
+            <div class="exercise-card reveal">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon">
+                  <i class="bi bi-person-fill-up"></i>
+                </div>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+              <h4>Shoulder Press</h4>
+              <span>Front and side deltoids</span>
+              <p class="text-muted small mt-2">
+                Builds shoulder width and upper-body stability.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'Shoulder Press',
+                      'Shoulders',
+                      'Sit on a bench with an upright back pad, raise the dumbbells to shoulder height, then press them overhead.',
+                      'Do not let your elbows drift too far back!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Arms" data-name="EZ-Bar Curl"
+          >
+            <div class="exercise-card reveal delay-1">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon"><i class="bi bi-fire"></i></div>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+              <h4>EZ-Bar Curl</h4>
+              <span>Biceps · Forearms</span>
+              <p class="text-muted small mt-2">
+                A wrist-friendly way to build biceps size.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'EZ-Bar Curl',
+                      'Arms',
+                      'Grip the EZ-bar at shoulder width, keep your elbows tight against your torso, then curl the weight toward your chest.',
+                      'Do not use momentum; keep your elbows locked in!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4 exercise-item"
+            data-category="Core" data-name="Plank"
+          >
+            <div class="exercise-card reveal delay-2">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="exercise-icon">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+              <h4>Plank</h4>
+              <span>Abs · Lower back</span>
+              <p class="text-muted small mt-2">
+                An isometric exercise to strengthen overall core stability.
+              </p>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary"
+              >
+                <button
+                  class="btn btn-sm btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exerciseModal"
+                  onclick="
+                    loadModal(
+                      'Plank',
+                      'Core',
+                      'Support yourself on your forearms and toes. Hold your body in a perfectly straight line for 30–60 seconds.',
+                      'Do not let your hips sag, and do not raise them too high!',
+                    )
+                  "
+                >
+                  How to
+                </button>
+                <button class="add-btn" onclick="addExercise(this)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal fade" id="exerciseModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light border-secondary">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title fw-bold" id="modalTitle">Exercise name</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <span class="badge bg-success mb-2" id="modalCategory"
+              >Category</span
+            >
+            <h6 class="text-pulse mt-3 fw-bold">Proper form:</h6>
+            <p id="modalDesc" class="text-muted small"></p>
+            <h6 class="text-warning mt-3 fw-bold">Common mistakes:</h6>
+            <p id="modalTips" class="text-muted small"></p>
+          </div>
+          <div class="modal-footer border-secondary">
+            <button
+              type="button"
+              class="btn btn-outline-light"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between gap-3"
+      >
+        <span>© 2026 Off Limits</span>
+        <span>100% online · Free · info@offlimits.hu</span>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast-message">Added to your workout!</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      let activeCategory = "all";
+
+      function filterExercises() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const items = document.querySelectorAll(".exercise-item");
+
+        items.forEach((item) => {
+          const name = item.getAttribute("data-name").toLowerCase();
+          const category = item.getAttribute("data-category");
+
+          const matchesSearch = name.includes(query);
+          const matchesCategory =
+            activeCategory === "all" || category === activeCategory;
+
+          if (matchesSearch && matchesCategory) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function filterCategory(cat, btn) {
+        activeCategory = cat;
+        document.querySelectorAll(".filter-btn").forEach((b) => {
+          b.classList.remove("btn-pulse", "active");
+          b.classList.add("btn-outline-light");
+        });
+        btn.classList.remove("btn-outline-light");
+        btn.classList.add("btn-pulse", "active");
+        filterExercises();
+      }
+
+      function loadModal(title, cat, desc, tips) {
+        document.getElementById("modalTitle").textContent = title;
+        document.getElementById("modalCategory").textContent = cat;
+        document.getElementById("modalDesc").textContent = desc;
+        document.getElementById("modalTips").textContent = tips;
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2200);
+      }
+
+      function addExercise(button) {
+        const c = button.closest(".exercise-item"),
+          day = document.getElementById("daySel").value;
+        Data.addEx(day, { name: c.dataset.name, cat: c.dataset.category });
+        button.textContent = "✓";
+        button.classList.add("added");
+        Auth.toast(c.dataset.name + " added to " + day);
+        setTimeout(() => {
+          button.textContent = "+";
+          button.classList.remove("added");
+        }, 1200);
+      }
+      addEventListener("authready", () => {
+        const s = document.getElementById("daySel");
+        s.innerHTML = Data.DAYS.map((d) => "<option>" + d + "</option>").join(
+          "",
+        );
+        s.value = Data.today();
+      });
+    </script>
+  </body>
+</html>

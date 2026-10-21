@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Off Limits — Contact and FAQ</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="auth.js" defer></script>
+  </head>
+
+  <body data-access="user">
+    <div id="site-nav"></div>
+
+    <header class="section-black pt-5 mt-5">
+      <div class="container pt-4">
+        <div class="section-heading reveal mx-auto text-center">
+          <p class="eyebrow">REACH OUT ANYTIME</p>
+          <h2>CONTACT AND <span>HELP</span></h2>
+          <p class="mx-auto" style="max-width: 650px; color: #c5c5c5">
+            Have a question about workout plans or how to use the site? Write to us and we'll do our best to reply quickly!
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section id="gyik" class="section-dark">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <div class="auth-box reveal h-100">
+              <p class="eyebrow">CONTACT INFO</p>
+              <h3 class="mb-4">FIND <span>US.</span></h3>
+
+              <div class="d-flex align-items-start gap-3 mb-4">
+                <div class="exercise-icon mb-0 fs-4">
+                  <i class="bi bi-globe2"></i>
+                </div>
+                <div>
+                  <strong class="d-block text-light fs-5"
+                    >Where can you find us?</strong
+                  >
+                  <span style="color: #c5c5c5"
+                    >Off Limits runs entirely online; there is no physical gym.</span
+                  >
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start gap-3 mb-4">
+                <div class="exercise-icon mb-0 fs-4">
+                  <i class="bi bi-clock-fill"></i>
+                </div>
+                <div>
+                  <strong class="d-block text-light fs-5"
+                    >When can you reach us?</strong
+                  >
+                  <span style="color: #c5c5c5">The site is available any time.</span
+                  ><br />
+                  <span style="color: #c5c5c5"
+                    >We do our best to reply to your messages quickly.</span
+                  >
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start gap-3 mb-4">
+                <div class="exercise-icon mb-0 fs-4">
+                  <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div>
+                  <strong class="d-block text-light fs-5">Email</strong>
+
+                  <span style="color: #c5c5c5">info@offlimits.hu</span>
+                </div>
+              </div>
+
+              <div
+                class="p-3 bg-dark rounded-3 border border-secondary text-light small mt-2"
+              >
+                <i class="bi bi-gift text-pulse me-1"></i>
+                <strong class="text-pulse">Free:</strong>
+                <span style="color: #c5c5c5"
+                  >Every Off Limits feature is free, with no subscription and no hidden costs.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="auth-box reveal delay-1">
+              <p class="eyebrow">SEND A MESSAGE</p>
+              <h3 class="mb-2">WRITE US A <span>MESSAGE.</span></h3>
+              <p class="mb-4" style="color: #c5c5c5">
+                Fill out the form below and our team will get back to you soon.
+              </p>
+
+              <form onsubmit="sendMessage(event)">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Your full name"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Your email address"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Subject"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <textarea
+                      class="form-control"
+                      rows="4"
+                      placeholder="Your message..."
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-pulse w-100 py-3">
+                      Send message <i class="bi bi-send ms-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-black">
+      <div class="container">
+        <div class="section-heading reveal text-center mx-auto mb-5">
+          <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+          <h2>EVERYTHING YOU <span>NEED TO KNOW.</span></h2>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-9 reveal delay-1">
+            <div class="accordion accordion-flush" id="faqAccordion">
+              <div
+                class="accordion-item bg-dark text-light border-secondary mb-3 rounded-3 overflow-hidden"
+              >
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed bg-dark text-light shadow-none fw-bold"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq1"
+                  >
+                    Is everything really free?
+                  </button>
+                </h2>
+                <div
+                  id="faq1"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div
+                    class="accordion-body border-top border-secondary"
+                    style="color: #c5c5c5"
+                  >
+                    Yes. Every Off Limits feature is free: no memberships, subscriptions, or paid plans.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="accordion-item bg-dark text-light border-secondary mb-3 rounded-3 overflow-hidden"
+              >
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed bg-dark text-light shadow-none fw-bold"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq2"
+                  >
+                    Where is the gym?
+                  </button>
+                </h2>
+                <div
+                  id="faq2"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div
+                    class="accordion-body border-top border-secondary"
+                    style="color: #c5c5c5"
+                  >
+                    We don't have a physical gym: Off Limits is an online platform. You build your workout plan here, then train wherever is comfortable for you.
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="accordion-item bg-dark text-light border-secondary mb-3 rounded-3 overflow-hidden"
+              >
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed bg-dark text-light shadow-none fw-bold"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq3"
+                  >
+                    How do I create my first workout plan?
+                  </button>
+                </h2>
+                <div
+                  id="faq3"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div
+                    class="accordion-body border-top border-secondary"
+                    style="color: #c5c5c5"
+                  >
+                    After signing up, add exercises with the + button in the Exercise Library, then follow them on the My Weekly Plan page.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between gap-3"
+      >
+        <span>© 2026 Off Limits</span>
+        <span>100% online · Free · info@offlimits.hu</span>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast-message">Message sent successfully!</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2200);
+      }
+
+      function sendMessage(e) {
+        e.preventDefault();
+        const f = [...e.target.querySelectorAll("input,textarea")];
+        Auth.sendMsg({
+          name: f[0].value.trim(),
+          email: f[1].value.trim(),
+          subject: f[2].value.trim(),
+          text: f[3].value.trim(),
+        });
+        Auth.toast("Thanks for your message! We'll reply soon.");
+        f[2].value = "";
+        f[3].value = "";
+      }
+      addEventListener("authready", () => {
+        const m = Auth.me(),
+          i = document.querySelectorAll("form input");
+        i[0].value = m.name;
+        i[1].value = m.email;
+      });
+    </script>
+  </body>
+</html>
